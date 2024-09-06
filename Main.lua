@@ -225,31 +225,62 @@ local InsExplode = Tabs.Robots:AddButton({
     Title = "Instant Explode",
     Description = "Instant Explode",
     Callback = function()
-        local ScreenGui = Instance.new("ScreenGui")
-        ScreenGui.Name = "ScreenGui"
-        ScreenGui.Parent = player:WaitForChild("PlayerGui")
-        ScreenGui.ResetOnSpawn = false
+        local player = game.Players.LocalPlayer
 
-        local Toggle = Instance.new("TextButton")
-        Toggle.Name = "Toggle"
-        Toggle.Parent = ScreenGui
-        Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        Toggle.Position = UDim2.new(0.5, -45, 0.5, 60)
-        Toggle.Size = UDim2.new(0, 90, 0, 38)
-        Toggle.Font = Enum.Font.SourceSans
-        Toggle.Text = "Explode!"
-        Toggle.TextColor3 = Color3.fromRGB(248, 248, 248)
-        Toggle.TextSize = 28.000
-        Toggle.Draggable = false
-        Toggle.MouseButton1Click:Connect(function()
-            game:GetService("ReplicatedStorage").Remotes.Robot.LightFuse:InvokeServer()
-wait(1)
-game:GetService("ReplicatedStorage").Remotes.Robot.Explode:InvokeServer()
-        end)
+-- Функция для создания кнопки
+local function createButton()
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "ScreenGui"
+    ScreenGui.Parent = player:WaitForChild("PlayerGui")
+    ScreenGui.ResetOnSpawn = false
 
-        local Corner = Instance.new("UICorner")
-        Corner.Name = "Corner"
-        Corner.Parent = Toggle
+    local Toggle = Instance.new("TextButton")
+    Toggle.Name = "Toggle"
+    Toggle.Parent = ScreenGui
+    Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Toggle.Position = UDim2.new(0.5, -45, 0.5, 60)
+    Toggle.Size = UDim2.new(0, 90, 0, 38)
+    Toggle.Font = Enum.Font.SourceSans
+    Toggle.Text = "Explode!"
+    Toggle.TextColor3 = Color3.fromRGB(248, 248, 248)
+    Toggle.TextSize = 28.000
+    Toggle.Draggable = false
+
+    -- Действие при нажатии на кнопку
+    Toggle.MouseButton1Click:Connect(function()
+        game:GetService("ReplicatedStorage").Remotes.Robot.LightFuse:InvokeServer()
+        wait(1)
+        game:GetService("ReplicatedStorage").Remotes.Robot.Explode:InvokeServer()
+    end)
+
+    local Corner = Instance.new("UICorner")
+    Corner.Name = "Corner"
+    Corner.Parent = Toggle
+end
+
+-- Функция для удаления кнопки, если она существует
+local function removeButton()
+    local screenGui = player:FindFirstChild("PlayerGui"):FindFirstChild("ScreenGui")
+    if screenGui then
+        screenGui:Destroy() -- Удаляет GUI с кнопкой
+    end
+end
+
+-- Проверка команды игрока
+if player.Team and player.Team.Name == "Robots" then
+    createButton() -- Создаем кнопку
+elseif player.Team and player.Team.Name == "Humans" then
+    removeButton() -- Удаляем кнопку, если она есть
+end
+
+-- Дополнительно можно сделать так, чтобы проверка выполнялась при изменении команды игрока
+player:GetPropertyChangedSignal("Team"):Connect(function()
+    if player.Team and player.Team.Name == "Robots" then
+        createButton() -- Создаем кнопку
+    elseif player.Team and player.Team.Name == "Humans" then
+        removeButton() -- Удаляем кнопку, если она есть
+    end
+end)
     end
 })
 
