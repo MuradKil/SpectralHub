@@ -72,20 +72,7 @@ local JumpHack = Tabs.Player:AddSlider("JumpPowerChanger", {
     end
 })
 
-local InfJump = Tabs.Player:AddButton({
-    Title = "Infinity Jump",
-    Description = "Jump Infinity times",
-    Callback = function()
-        local InfiniteJumpEnabled = true
-game:GetService("UserInputService").JumpRequest:connect(function()
-	if InfiniteJumpEnabled then
-		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
-	end
-end)
-    end
-})
-
-local GetWeap = Tabs.Player:AddSection("Get Weapons")
+local GetWeap = Tabs.Player:AddSection("Get Weapons (Works only once per round)")
 
 local GetSword = Tabs.Player:AddButton({
     Title = "Get Sword",
