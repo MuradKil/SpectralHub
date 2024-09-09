@@ -38,36 +38,37 @@ Tabs.Main:AddParagraph({
 -- Player Tab
 local speed = 16
 
-local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false })
+local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
 
 InfJp:OnChanged(function()
-    getgenv().infj = Infjump.Value
+    getgenv().infj = InfJp.Value
 
-local player = game:GetService("Players").LocalPlayer
-local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    local player = game:GetService("Players").LocalPlayer
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
 
-if infj and humanoid then
-    _G.jpbypass = humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
-        humanoid.JumpPower = 50
-    end)
+    if getgenv().infj and humanoid then
+        _G.jpbypass = humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
+            humanoid.JumpPower = 50
+        end)
 
-    _G.jumpcheck = game:GetService("UserInputService").JumpRequest:Connect(function()
-        if getgenv().infj then
-            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        _G.jumpcheck = game:GetService("UserInputService").JumpRequest:Connect(function()
+            if getgenv().infj then
+                humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+            end
+        end)
+    else
+        if _G.jpbypass then
+            _G.jpbypass:Disconnect()
+            _G.jpbypass = nil
         end
-    end)
-else
-    if _G.jpbypass then
-        _G.jpbypass:Disconnect()
-        _G.jpbypass = nil
-    end
 
-    if _G.jumpcheck then
-        _G.jumpcheck:Disconnect()
-        _G.jumpcheck = nil
+        if _G.jumpcheck then
+            _G.jumpcheck:Disconnect()
+            _G.jumpcheck = nil
+        end
     end
-end
 end)
+
 
 local NoCD = Tabs.Player:AddButton({
     Title = "No Cooldown",
