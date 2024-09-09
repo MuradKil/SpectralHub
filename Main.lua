@@ -38,10 +38,35 @@ Tabs.Main:AddParagraph({
 -- Player Tab
 local speed = 16
 
-local InfJ = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false })
+local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false })
 
-InfJ:OnChanged(function()
-    print("Hello")
+InfJp:OnChanged(function()
+    getgenv().infj = Infjump.Value
+
+local player = game:GetService("Players").LocalPlayer
+local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+
+if infj and humanoid then
+    _G.jpbypass = humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
+        humanoid.JumpPower = 50
+    end)
+
+    _G.jumpcheck = game:GetService("UserInputService").JumpRequest:Connect(function()
+        if getgenv().infj then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+else
+    if _G.jpbypass then
+        _G.jpbypass:Disconnect()
+        _G.jpbypass = nil
+    end
+
+    if _G.jumpcheck then
+        _G.jumpcheck:Disconnect()
+        _G.jumpcheck = nil
+    end
+end
 end)
 
 local NoCD = Tabs.Player:AddButton({
