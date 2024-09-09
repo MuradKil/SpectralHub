@@ -72,7 +72,7 @@ local JumpHack = Tabs.Player:AddSlider("JumpPowerChanger", {
     end
 })
 
-local GetWeap = Tabs.Player:AddSection("Get Weapons (Works only once per round)")
+local GetWeap = Tabs.Player:AddSection("Get Weapons (Beta)")
 
 local GetSword = Tabs.Player:AddButton({
     Title = "Get Sword",
