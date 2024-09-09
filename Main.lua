@@ -1,4 +1,30 @@
+-- functions
+
 local player = game:GetService("Players").LocalPlayer
+local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+
+if infj and humanoid then
+    _G.jpbypass = humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
+        humanoid.JumpPower = jp
+    end)
+
+    _G.jumpcheck = game:GetService("UserInputService").JumpRequest:Connect(function()
+        if getgenv().infj then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+else
+    if _G.jpbypass then
+        _G.jpbypass:Disconnect()
+        _G.jpbypass = nil
+    end
+
+    if _G.jumpcheck then
+        _G.jumpcheck:Disconnect()
+        _G.jumpcheck = nil
+    end
+end
+
 local weapon_attr = player:WaitForChild("WeaponsAttributes")
 
 local maceMod = weapon_attr:WaitForChild("Mace")
@@ -37,6 +63,20 @@ Tabs.Main:AddParagraph({
 
 -- Player Tab
 local speed = 16
+
+local infjump = Tabs.Player:AddToggle("InfJump", 
+{
+    Title = "Inf Jump", 
+    Description = "Infinite Jump",
+    Default = false
+    Callback = function(ij)
+	if ij then
+	    getgenv().infj = true
+	else
+	    getgenv().infj = false
+        end
+    end 
+})
 
 local NoCD = Tabs.Player:AddButton({
     Title = "No Cooldown",
