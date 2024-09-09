@@ -38,6 +38,12 @@ Tabs.Main:AddParagraph({
 -- Player Tab
 local speed = 16
 
+local InfJ = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false })
+
+InfJ:OnChanged(function()
+    print("Hello")
+end)
+
 local NoCD = Tabs.Player:AddButton({
     Title = "No Cooldown",
     Description = "No Cooldown on Weapons",
