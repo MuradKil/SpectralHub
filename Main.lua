@@ -113,7 +113,7 @@ local FovHack = Tabs.Player:AddSlider("FovOfP", {
     Max = 120,
     Rounding = 1,
     Callback = function(fov)
-        game.Workspace.CurrentCamera.FieldOfViev = fov
+        game.Workspace.CurrentCamera.FieldOfView = fov
     end
 })
 
