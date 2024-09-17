@@ -106,33 +106,6 @@ local GravityHack = Tabs.Player:AddSlider("GravityOfP", {
     end
 })
 
-local function setCameraFov(fov)
-    local camera = game.Workspace.CurrentCamera
-    if camera then
-        camera.FieldOfView = fov
-    else
-        warn("CurrentCamera is not available")
-    end
-end
-
-
-RunService.RenderStepped:Connect(function()
-    local camera = game.Workspace.CurrentCamera
-    if camera then
-set the FOV
-        RunService.RenderStepped:Disconnect() 
-        local FovHack = Tabs.Player:AddSlider("FovOfP", {
-            Title = "Fov",
-            Description = "Change Fov (Field of view)",
-            Default = 70,
-            Min = 30,
-            Max = 120,
-            Rounding = 1,
-            Callback = setCameraFov
-        })
-    end
-end)
-
 local OtherP = Tabs.Player:AddSection("Others")
 
 local NoCD = Tabs.Player:AddButton({
