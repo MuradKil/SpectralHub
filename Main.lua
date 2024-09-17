@@ -105,6 +105,18 @@ local GravityHack = Tabs.Player:AddSlider("GravityOfP", {
     end
 })
 
+local FovHack = Tabs.Player:AddSlider("FovOfP", {
+    Title = "Fov",
+    Description = "Change Fov (Field of viev)",
+    Default = 70,
+    Min = 30,
+    Max = 120,
+    Rounding = 1,
+    Callback = function(fov)
+        game.Workspace.CurrentCamera.FieldOfViev = fov
+    end
+})
+
 local OtherP = Tabs.Player:AddSection("Others")
 
 local NoCD = Tabs.Player:AddButton({
