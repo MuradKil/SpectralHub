@@ -69,17 +69,6 @@ InfJp:OnChanged(function()
     end
 end)
 
-
-local NoCD = Tabs.Player:AddButton({
-    Title = "No Cooldown",
-    Description = "No Cooldown on Weapons",
-    Callback = function()
-        raygunMod:SetAttribute("Cooldown", 0)
-        maceMod:SetAttribute("Cooldown", 0)
-        staffMod:SetAttribute("Cooldown", 0)
-    end
-})
-
 local SpeedHack = Tabs.Player:AddSlider("Speed Changer", {
     Title = "Speed",
     Description = "Change Player Speed",
@@ -101,6 +90,30 @@ local JumpHack = Tabs.Player:AddSlider("JumpPowerChanger", {
     Rounding = 1,
     Callback = function(jp)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = jp
+    end
+})
+
+local GravityHack = Tabs.Player:AddSlider("GravityOfP", {
+    Title = "Gravity",
+    Description = "Change Gravity (Normal - 196.2)",
+    Default = 196.2,
+    Min = 0,
+    Max = 200,
+    Rounding = 1,
+    Callback = function(grav)
+        game.Workspace.Gravity = grav
+    end
+})
+
+local OtherP = Tabs.Player:AddSection("Others")
+
+local NoCD = Tabs.Player:AddButton({
+    Title = "No Cooldown",
+    Description = "No Cooldown on Weapons",
+    Callback = function()
+        raygunMod:SetAttribute("Cooldown", 0)
+        maceMod:SetAttribute("Cooldown", 0)
+        staffMod:SetAttribute("Cooldown", 0)
     end
 })
 
