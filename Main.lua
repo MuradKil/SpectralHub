@@ -41,48 +41,8 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
 local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
-
-Nocl:OnChanged(function()
-    getgenv().ClipOn = Nocl.Value  -- Обновляем значение ClipOn в зависимости от состояния Nocl
-end)
-
-local function ToggleNoclip(enabled)
-    for _, player in pairs(Players:GetPlayers()) do
-        local character = player.Character
-        if character then
-            for _, part in pairs(character:GetDescendants()) do
-                if part:IsA("BasePart") then
-                    part.CanCollide = not enabled
-                end
-            end
-        end
-    end
-end
-
-RunService.Heartbeat:Connect(function()
-    if getgenv().ClipOn then
-        for _, player in pairs(Players:GetPlayers()) do
-            local character = player.Character
-            if character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false  -- Отключаем коллизию
-                    end
-                end
-            end
-        end
-    else
-        for _, player in pairs(Players:GetPlayers()) do
-            local character = player.Character
-            if character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = true  -- Включаем коллизию
-                    end
-                end
-            end
-        end
-    end
+Nocl:OnChanged(function(value)
+    _G._Noclip = value
 end)
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
@@ -487,5 +447,22 @@ game:GetService("RunService").RenderStepped:Connect(function()
     local character = player.Character
     if character and character:FindFirstChild("Humanoid") then
         character.Humanoid.WalkSpeed = speed
+    end
+end)
+
+RunService.Heartbeat:Connect(function()
+    if _G._Noclip then
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end
+    else
+        ToggleNoclip(false) 
     end
 end)
