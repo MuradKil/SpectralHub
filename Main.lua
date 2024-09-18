@@ -40,6 +40,7 @@ local speed = 16
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
+local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
 -- Предполагается, что Nocl - это объект типа BoolValue
 Nocl:OnChanged(function()
     getgenv().ClipOn = Nocl.Value  -- Обновляем значение ClipOn в зависимости от состояния Nocl
