@@ -72,11 +72,13 @@ end)
 
 local Nocl = Tabs.Player:AddToggle("No Clip", {Title = "Noclip", Default = false})
 
-Nocl:OnChanged(function()
-    local Players = game:GetService("Players")
+local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-getgenv().ClipOn = Nocl.Value
+-- Предполагается, что Nocl - это объект типа BoolValue
+Nocl:OnChanged(function()
+    getgenv().ClipOn = Nocl.Value  -- Обновляем значение ClipOn в зависимости от состояния Nocl
+end)
 
 local function ToggleNoclip(enabled)
     for _, player in pairs(Players:GetPlayers()) do
@@ -89,9 +91,9 @@ local function ToggleNoclip(enabled)
             end
         end
     end
-    getgenv().ClipOn = enabled
 end
 
+-- Подключаемся к Heartbeat один раз, чтобы постоянно проверять состояние ClipOn
 RunService.Heartbeat:Connect(function()
     if getgenv().ClipOn then
         for _, player in pairs(Players:GetPlayers()) do
@@ -99,7 +101,7 @@ RunService.Heartbeat:Connect(function()
             if character then
                 for _, part in pairs(character:GetDescendants()) do
                     if part:IsA("BasePart") then
-                        part.CanCollide = false
+                        part.CanCollide = false  -- Отключаем коллизию
                     end
                 end
             end
@@ -110,13 +112,12 @@ RunService.Heartbeat:Connect(function()
             if character then
                 for _, part in pairs(character:GetDescendants()) do
                     if part:IsA("BasePart") then
-                        part.CanCollide = true
+                        part.CanCollide = true  -- Включаем коллизию
                     end
                 end
             end
         end
     end
-end
 end)
 
 local SpeedHack = Tabs.Player:AddSlider("Speed Changer", {
