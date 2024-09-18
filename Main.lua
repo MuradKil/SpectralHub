@@ -41,7 +41,7 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
 local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
--- Предполагается, что Nocl - это объект типа BoolValue
+
 Nocl:OnChanged(function()
     getgenv().ClipOn = Nocl.Value  -- Обновляем значение ClipOn в зависимости от состояния Nocl
 end)
@@ -59,7 +59,6 @@ local function ToggleNoclip(enabled)
     end
 end
 
--- Подключаемся к Heartbeat один раз, чтобы постоянно проверять состояние ClipOn
 RunService.Heartbeat:Connect(function()
     if getgenv().ClipOn then
         for _, player in pairs(Players:GetPlayers()) do
