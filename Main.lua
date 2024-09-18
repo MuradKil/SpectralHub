@@ -38,6 +38,52 @@ Tabs.Main:AddParagraph({
 -- Player Tab
 local speed = 16
 local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+-- Предполагается, что Nocl - это объект типа BoolValue
+Nocl:OnChanged(function()
+    getgenv().ClipOn = Nocl.Value  -- Обновляем значение ClipOn в зависимости от состояния Nocl
+end)
+
+local function ToggleNoclip(enabled)
+    for _, player in pairs(Players:GetPlayers()) do
+        local character = player.Character
+        if character then
+            for _, part in pairs(character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = not enabled
+                end
+            end
+        end
+    end
+end
+
+-- Подключаемся к Heartbeat один раз, чтобы постоянно проверять состояние ClipOn
+RunService.Heartbeat:Connect(function()
+    if getgenv().ClipOn then
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false  -- Отключаем коллизию
+                    end
+                end
+            end
+        end
+    else
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true  -- Включаем коллизию
+                    end
+                end
+            end
+        end
+    end
+end)
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
 
