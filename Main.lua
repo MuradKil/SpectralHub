@@ -70,6 +70,55 @@ InfJp:OnChanged(function()
     end
 end)
 
+local Nocl = Tabs.Player:AddToggle("No Clip", {Title = "Noclip", Default = false})
+
+Nocl:OnChanged(function()
+    local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+getgenv().ClipOn = Nocl.Value
+
+local function ToggleNoclip(enabled)
+    for _, player in pairs(Players:GetPlayers()) do
+        local character = player.Character
+        if character then
+            for _, part in pairs(character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = not enabled
+                end
+            end
+        end
+    end
+    getgenv().ClipOn = enabled
+end
+
+RunService.Heartbeat:Connect(function()
+    if getgenv().ClipOn then
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end
+    else
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
+            end
+        end
+    end
+end
+end)
+
 local SpeedHack = Tabs.Player:AddSlider("Speed Changer", {
     Title = "Speed",
     Description = "Change Player Speed",
