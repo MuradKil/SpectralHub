@@ -153,7 +153,12 @@ local GetSword = Tabs.Player:AddButton({
     Title = "Get Sword",
     Description = "Add Sword to your Backpack",
     Callback = function()
-        print("hi")
+        local args = {
+            [1] = "Weapons",
+            [2] = "Sword"
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -161,9 +166,12 @@ local GetSpear = Tabs.Player:AddButton({
     Title = "Get Spear",
     Description = "Add Spear to your Backpack",
     Callback = function()
-       local SpearW = game.ReplicatedStorage.Assets.Weapons.Spear:Clone() 
+       local args = {
+            [1] = "Spear",
+            [2] = "Rocket_Launcher"
+        }
 
-SpearW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -171,9 +179,12 @@ local GetCrossbow = Tabs.Player:AddButton({
     Title = "Get Crossbow",
     Description = "Add Crossbow to your Backpack",
     Callback = function()
-       local CrossbowW = game.ReplicatedStorage.Assets.Weapons.Crossbow:Clone() 
+       local args = {
+            [1] = "Weapons",
+            [2] = "Crossbow"
+        }
 
-CrossbowW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -181,9 +192,12 @@ local GetFlamethrower = Tabs.Player:AddButton({
     Title = "Get Flamethrower",
     Description = "Add Flamethrower to your Backpack",
     Callback = function()
-       local FlamethrowerW = game.ReplicatedStorage.Assets.Weapons.Flamethrower:Clone() 
+       local args = {
+            [1] = "Weapons",
+            [2] = "Flamethrower"
+        }
 
-FlamethrowerW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -191,9 +205,12 @@ local GetMace = Tabs.Player:AddButton({
     Title = "Get Mace",
     Description = "Add Mace to your Backpack",
     Callback = function()
-       local MaceW = game.ReplicatedStorage.Assets.Weapons.Mace:Clone() 
+       local args = {
+            [1] = "Weapons",
+            [2] = "Mace"
+        }
 
-MaceW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -201,9 +218,12 @@ local GetStaff = Tabs.Player:AddButton({
     Title = "Get Staff",
     Description = "Add Staff to your Backpack",
     Callback = function()
-       local StaffW = game.ReplicatedStorage.Assets.Weapons.Staff:Clone() 
+       local args = {
+            [1] = "Weapons",
+            [2] = "Staff"
+        }
 
-StaffW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -211,9 +231,12 @@ local GetRayGun = Tabs.Player:AddButton({
     Title = "Get RayGun",
     Description = "Add RayGun to your Backpack",
     Callback = function()
-       local RayGunW = game.ReplicatedStorage.Assets.Weapons.RayGun:Clone() 
+       local args = {
+            [1] = "Weapons",
+            [2] = "RayGun"
+        }
 
-RayGunW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
@@ -221,9 +244,12 @@ local GetRocketLauncher = Tabs.Player:AddButton({
     Title = "Get Rocket Launcher",
     Description = "Add Rocket Launcher to your Backpack",
     Callback = function()
-       local RLW = game.ReplicatedStorage.Assets.Weapons.Rocket_Launcher:Clone() 
+       local args = {
+            [1] = "Weapons",
+            [2] = "Rocket_Launcher"
+        }
 
-RLW = game.Players.LocalPlayer.Backpack
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 -- Esp Tab(Credit to .terni)
@@ -470,3 +496,5 @@ game:GetService("RunService").RenderStepped:Connect(function()
         character.Humanoid.WalkSpeed = speed
     end
 end)
+
+getgenv()._Noclip = false
