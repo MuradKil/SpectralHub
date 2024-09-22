@@ -41,8 +41,8 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
 local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
-Nocl:OnChanged(function(value)
-    _G._Noclip = value
+Nocl:OnChanged(function(nc)
+    _G._Noclip = nc
 end)
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
