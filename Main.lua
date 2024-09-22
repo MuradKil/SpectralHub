@@ -130,13 +130,12 @@ local GetSword = Tabs.Player:AddButton({
     Title = "Get Sword",
     Description = "Add Sword to your Backpack",
     Callback = function()
-       local args = {
-    [1] = "Weapons",
-    [2] = "Sword"
-}
+        local args = {
+            [1] = "Weapons",
+            [2] = "Sword"
+        }
 
-game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
-
+        game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
     end
 })
 
