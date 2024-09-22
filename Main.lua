@@ -167,8 +167,8 @@ local GetSpear = Tabs.Player:AddButton({
     Description = "Add Spear to your Backpack",
     Callback = function()
        local args = {
-            [1] = "Spear",
-            [2] = "Rocket_Launcher"
+            [1] = "Weapons",
+            [2] = "Spear"
         }
 
         game:GetService("ReplicatedStorage").Remotes.Shop.EquipItem:InvokeServer(unpack(args))
