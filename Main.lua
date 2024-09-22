@@ -42,7 +42,30 @@ local Players = game:GetService("Players")
 
 local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
 Nocl:OnChanged(function(nc)
-    _G._Noclip = nc
+    getgenv()._Noclip = nc
+    if nc then
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end
+    else
+        for _, player in pairs(Players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
+            end
+        end
+    end
 end)
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
@@ -445,22 +468,5 @@ game:GetService("RunService").RenderStepped:Connect(function()
     local character = player.Character
     if character and character:FindFirstChild("Humanoid") then
         character.Humanoid.WalkSpeed = speed
-    end
-end)
-
-RunService.Heartbeat:Connect(function()
-    if _G._Noclip then
-        for _, player in pairs(Players:GetPlayers()) do
-            local character = player.Character
-            if character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
-                    end
-                end
-            end
-        end
-    else
-        ToggleNoclip(false) 
     end
 end)
