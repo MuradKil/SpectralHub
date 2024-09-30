@@ -72,7 +72,28 @@ end)
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
 
 InfJp:OnChanged(function()
-    _G.infjump = InfJp.Value
+    getgenv().infj = InfJp.Value
+    local player = game:GetService("Players").LocalPlayer
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    if getgenv().infj and humanoid then
+        _G.jpbypass = humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
+            humanoid.JumpPower = 50
+        end)
+        _G.jumpcheck = game:GetService("UserInputService").JumpRequest:Connect(function()
+            if getgenv().infj then
+                humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+            end
+        end)
+    else
+        if _G.jpbypass then
+            _G.jpbypass:Disconnect()
+            _G.jpbypass = nil
+        end
+        if _G.jumpcheck then
+            _G.jumpcheck:Disconnect()
+            _G.jumpcheck = nil
+        end
+    end
 end)
 
 local SpeedHack = Tabs.Player:AddSlider("Speed Changer", {
@@ -473,32 +494,4 @@ game:GetService("RunService").RenderStepped:Connect(function()
     end
 end)
 
-while wait(1) do
-    if _G.infjump and humanoid then
-        if not _G.jpbypass then
-            _G.jpbypass = humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
-                humanoid.JumpPower = 50
-            end)
-        end
-
-        if not _G.jumpcheck then
-            _G.jumpcheck = game:GetService("UserInputService").JumpRequest:Connect(function()
-                if _G.infjump then
-                    humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                end
-            end)
-        end
-    else
-        if _G.jpbypass then
-            _G.jpbypass:Disconnect()
-            _G.jpbypass = nil
-        end
-
-        if _G.jumpcheck then
-            _G.jumpcheck:Disconnect()
-            _G.jumpcheck = nil
-        end
-    end
-end
 getgenv()._Noclip = false
-getgenv().infjump = false
