@@ -9,8 +9,8 @@ local Fluent = loadstring(game:HttpGet("https://pastebin.com/raw/mDJ5DxJ9"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Spectral | BTSTR ",
-    SubTitle = " by Kil4ik",
+    Title = "Spectral Hub",
+    SubTitle = " BTSTR",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 340),
     Acrylic = false,
@@ -31,7 +31,7 @@ Tabs.Main:AddParagraph({
         Content = "Welcome to the Spectral BTSTR\nIts early beta test!"
     })
 Tabs.Main:AddParagraph({
-        Title = "Devs: Kil4ik, BBD4",
+        Title = "Devs: MurKilDev, BBD4",
         Content = ""
     })
 
