@@ -320,24 +320,12 @@ end
     end
 end)
 -- Robots Tab
+local instexpsp = 1
 local InsExplode = Tabs.Robots:AddButton({
     Title = "Instant Explode",
     Description = "Instant Explode",
     Callback = function()
         local player = game.Players.LocalPlayer
-
-local InsExplSlid = Tabs.Robots:AddSlider("Slider", 
-{
-    Title = "Instant Explode Speed",
-    Description = "Change Instant Explode Speed",
-    Default = 1,
-    Min = 0,
-    Max = 1,
-    Rounding = 0.1,
-    Callback = function(Value)
-        instexpsp = Value
-    end
-})
 
 local function createButton()
     local ScreenGui = Instance.new("ScreenGui")
@@ -391,6 +379,19 @@ player:GetPropertyChangedSignal("Team"):Connect(function()
         removeButton() -- Удаляем кнопку, если она есть
     end
 end)
+    end
+})
+
+local InsExplSlid = Tabs.Robots:AddSlider("Slider", 
+{
+    Title = "Instant Explode Speed",
+    Description = "Change Instant Explode Speed",
+    Default = 1,
+    Min = 0,
+    Max = 1,
+    Rounding = 0.1,
+    Callback = function(Value)
+        instexpsp = Value
     end
 })
 
