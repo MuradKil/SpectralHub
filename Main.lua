@@ -320,7 +320,6 @@ end
     end
 end)
 -- Robots Tab
-local instexpsp = 1
 local InsExplode = Tabs.Robots:AddButton({
     Title = "Instant Explode",
     Description = "Instant Explode",
@@ -348,7 +347,7 @@ local function createButton()
     
     Toggle.MouseButton1Click:Connect(function()
         game:GetService("ReplicatedStorage").Remotes.Robot.LightFuse:InvokeServer()
-        wait(instexpsp)
+        wait(0.5)
         game:GetService("ReplicatedStorage").Remotes.Robot.Explode:InvokeServer()
     end)
 
@@ -380,20 +379,6 @@ player:GetPropertyChangedSignal("Team"):Connect(function()
     end
 end)
     end
-})
-
-local Instexptog = Tabs.Robots:AddToggle("MyToggle", 
-{
-    Title = "Instant Explode Speed", 
-    Description = "If off - 1s |If on - 0s ",
-    Default = false
-    Callback = function(state)
-	if state then
-	    instexpsp = 0
-	else
-	    instexpsp = 1
-        end
-    end 
 })
 
 local ChangeRobots = Tabs.Robots:AddSection("Change Robots")
