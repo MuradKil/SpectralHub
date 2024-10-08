@@ -326,7 +326,7 @@ local InsExplode = Tabs.Robots:AddButton({
     Callback = function()
         local player = game.Players.LocalPlayer
 
-local InsExplSlid = Tab:AddSlider("Slider", 
+local InsExplSlid = Tabs.Robots:AddSlider("Slider", 
 {
     Title = "Instant Explode Speed",
     Description = "Change Instant Explode Speed",
