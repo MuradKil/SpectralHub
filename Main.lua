@@ -326,6 +326,19 @@ local InsExplode = Tabs.Robots:AddButton({
     Callback = function()
         local player = game.Players.LocalPlayer
 
+local InsExplSlid = Tab:AddSlider("Slider", 
+{
+    Title = "Instant Explode Speed",
+    Description = "Change Instant Explode Speed",
+    Default = 1,
+    Min = 0,
+    Max = 1,
+    Rounding = 0.1,
+    Callback = function(Value)
+        instexpsp = Value
+    end
+})
+
 local function createButton()
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "ScreenGui"
@@ -347,7 +360,7 @@ local function createButton()
     
     Toggle.MouseButton1Click:Connect(function()
         game:GetService("ReplicatedStorage").Remotes.Robot.LightFuse:InvokeServer()
-        wait(1)
+        wait(instexpsp)
         game:GetService("ReplicatedStorage").Remotes.Robot.Explode:InvokeServer()
     end)
 
