@@ -382,7 +382,7 @@ end)
     end
 })
 
-local Instexptog = Tab:AddToggle("MyToggle", 
+local Instexptog = Tabs.Robots:AddToggle("MyToggle", 
 {
     Title = "Instant Explode Speed", 
     Description = "If off - 1s |If on - 0s ",
