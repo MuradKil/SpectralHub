@@ -382,18 +382,20 @@ end)
     end
 })
 
-local InsExplSlid = Tabs.Robots:AddSlider("Slider", 
+local Instexptog = Tab:AddToggle("MyToggle", 
 {
-    Title = "Instant Explode Speed",
-    Description = "Change Instant Explode Speed",
-    Default = 1,
-    Min = 0,
-    Max = 1,
-    Rounding = 0.1,
-    Callback = function(Value)
-        instexpsp = Value
-    end
+    Title = "Instant Explode Speed", 
+    Description = "If off - 1s |If on - 0s ",
+    Default = false
+    Callback = function(state)
+	if state then
+	    instexpsp = 0
+	else
+	    instexpsp = 1
+        end
+    end 
 })
+
 
 local ChangeRobots = Tabs.Robots:AddSection("Change Robots")
 
