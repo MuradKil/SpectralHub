@@ -49,6 +49,7 @@ Nocl:OnChanged(function(nc)
 	print("work")
     else
 	print("nowork")
+	end
     end
 end)
 
