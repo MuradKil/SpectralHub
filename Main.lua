@@ -1,6 +1,7 @@
 local player = game:GetService("Players").LocalPlayer
 local weapon_attr = player:WaitForChild("WeaponsAttributes")
 local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+local RunService = game:GetService("RunService")
 
 local maceMod = weapon_attr:WaitForChild("Mace")
 local raygunMod = weapon_attr:WaitForChild("RayGun")
@@ -40,32 +41,28 @@ Tabs.Main:AddParagraph({
 local speed = 16
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
+local Noclipping = nil
 
 local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
 Nocl:OnChanged(function(nc)
-    getgenv()._Noclip = nc
-    if nc then
-        for _, player in pairs(Players:GetPlayers()) do
-            local character = player.Character
-            if character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
+    if state then
+        Clip = false
+        wait(0.1)
+        local function NoclipLoop()
+            if Clip == false and player.Character ~= nil then
+                for _, child in pairs(player.Character:GetDescendants()) do
+                    if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
+                        child.CanCollide = false
                     end
                 end
             end
         end
+        Noclipping = RunService.Stepped:Connect(NoclipLoop)
     else
-        for _, player in pairs(Players:GetPlayers()) do
-            local character = player.Character
-            if character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = true
-                    end
-                end
-            end
+        if Noclipping then
+            Noclipping:Disconnect()
         end
+        Clip = true
     end
 end)
 
@@ -493,5 +490,3 @@ game:GetService("RunService").RenderStepped:Connect(function()
         character.Humanoid.WalkSpeed = speed
     end
 end)
-
-getgenv()._Noclip = false
