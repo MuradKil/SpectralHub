@@ -44,7 +44,7 @@ local Players = game:GetService("Players")
 local Noclipping = nil
 
 local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
-Nocl:OnChanged(function(nc)
+Nocl:OnChanged(function(state)
     if state then
         Clip = false
         wait(0.1)
