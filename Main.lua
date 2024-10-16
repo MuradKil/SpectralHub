@@ -43,20 +43,13 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local Noclipping = nil
 
-local Nocl = Tabs.Player:AddToggle("Nocl", 
-{
-    Title = "NoClip", 
-    Description = "Noclip",
-    Default = false
-    Callback = function(state)
-	if state then
-	    print("Toggle On")
-	else
-	    print("Toggle Off")
-        end
-    end 
-})
-
+local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
+Nocl:OnChanged(function(nc)
+    if nc == true do
+	print("work")
+    else
+	print("nowork")
+end)
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
 
