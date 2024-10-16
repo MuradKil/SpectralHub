@@ -43,28 +43,20 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local Noclipping = nil
 
-local Nocl = Tabs.Player:AddToggle("Noclip", {Title = "No Clip", Default = false})
-Nocl:OnChanged(function(state)
-    if state then
-        Clip = false
-        wait(0.1)
-        local function NoclipLoop()
-            if Clip == false and player.Character ~= nil then
-                for _, child in pairs(player.Character:GetDescendants()) do
-                    if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
-                        child.CanCollide = false
-                    end
-                end
-            end
+local Nocl = Tabs.Player:AddToggle("Nocl", 
+{
+    Title = "NoClip", 
+    Description = "Noclip",
+    Default = false
+    Callback = function(state)
+	if state then
+	    print("Toggle On")
+	else
+	    print("Toggle Off")
         end
-        Noclipping = RunService.Stepped:Connect(NoclipLoop)
-    else
-        if Noclipping then
-            Noclipping:Disconnect()
-        end
-        Clip = true
-    end
-end)
+    end 
+})
+
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
 
