@@ -46,7 +46,7 @@ local Noclipping = nil
 
 Tabs.Player:AddToggle("MyNoclip", {
        Title = "NoClip",
-       Description = "NoClip",
+       Description = "",
 	   Default = false,
 	   Callback = function(bool)
        if bool then
