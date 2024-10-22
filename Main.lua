@@ -41,7 +41,35 @@ Tabs.Main:AddParagraph({
 local speed = 16
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
+local speaker = game:GetService("Players").LocalPlayer
 local Noclipping = nil
+
+Tabs.Main:AddToggle("MyNoclip", {
+       Title = "NoClip",
+       Description = "NoClip",
+	   Default = false,
+	   Callback = function(bool)
+       if bool then
+		Clip = false
+		wait(0.1)
+		local function NoclipLoop()
+		       if Clip == false and speaker.Character ~= nil then
+			       for _, child in pairs(speaker.Character:GetDescendants()) do
+					if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
+						child.CanCollide = false
+					end
+				end
+			end
+		end
+		Noclipping = RunService.Stepped:Connect(NoclipLoop)
+	else
+		if Noclipping then
+			Noclipping:Disconnect()
+		end
+		Clip = true
+	end
+end
+})
 
 local InfJp = Tabs.Player:AddToggle("InfJump", {Title = "Infinite Jump", Default = false})
 
