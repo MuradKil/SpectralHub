@@ -44,7 +44,7 @@ local Players = game:GetService("Players")
 local speaker = game:GetService("Players").LocalPlayer
 local Noclipping = nil
 
-Tabs.Main:AddToggle("MyNoclip", {
+Tabs.Player:AddToggle("MyNoclip", {
        Title = "NoClip",
        Description = "NoClip",
 	   Default = false,
