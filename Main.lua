@@ -30,7 +30,7 @@ local Tabs = {
 
 Tabs.Main:AddParagraph({
         Title = "Welcome!",
-        Content = "Welcome to the Spectral BTSTR\nIts early beta test!"
+        Content = "Welcome to the Spectral BTSTR\nThank You For Using Spectral Hub!"
     })
 Tabs.Main:AddParagraph({
         Title = "Devs: MurKilDev, BBD4",
